@@ -40,7 +40,7 @@ func TestFinalSubPositionWithAim(t *testing.T) {
 		},
 		{
 			"Real case",
-			puzzleinput.ReadLinesFrom("04_input.txt"),
+			puzzleinput.ReadLinesFrom("02_input.txt"),
 			1463827010,
 		},
 	})

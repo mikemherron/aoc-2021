@@ -40,7 +40,7 @@ func TestProcessDiagnostics(t *testing.T) {
 		},
 		{
 			"Real case",
-			puzzleinput.ReadLinesFrom("04_input.txt"),
+			puzzleinput.ReadLinesFrom("03_input.txt"),
 			3912944,
 			4996233,
 		},
