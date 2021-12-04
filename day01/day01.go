@@ -1,6 +1,6 @@
 package day01
 
-import "AdventCode2020/util"
+import "AdventCode2021/util"
 
 func countDepthIncreasesInWindow(measurements []int, w int) int {
 	minMeasurements := w + 1

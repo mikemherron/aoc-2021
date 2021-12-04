@@ -1,7 +1,7 @@
 package day02
 
 import (
-	"AdventCode2020/util"
+	"AdventCode2021/util"
 	"strings"
 )
 

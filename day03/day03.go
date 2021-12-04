@@ -1,7 +1,7 @@
 package day03
 
 import (
-	"AdventCode2020/util"
+	"AdventCode2021/util"
 )
 
 type diagnostics struct {

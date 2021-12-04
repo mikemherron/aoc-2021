@@ -1,7 +1,7 @@
 package day03
 
 import (
-	"AdventCode2020/puzzleinput"
+	"AdventCode2021/puzzleinput"
 	"testing"
 )
 

@@ -1,7 +1,7 @@
 package puzzleinput
 
 import (
-	"AdventCode2020/util"
+	"AdventCode2021/util"
 	"io/ioutil"
 	"os"
 	"path/filepath"
