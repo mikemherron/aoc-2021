@@ -55,9 +55,6 @@ func Bingo(s []string) (int, int) {
 		for rNum, r := range boardsInput[i+1 : i+6] {
 			for cNum, num := range util.SplitToInts(r, ColSeparator) {
 				b.add(num, rNum, cNum)
-				if _, ok := boardIdx[num]; !ok {
-					boardIdx[num] = make([]*board, 0)
-				}
 				boardIdx[num] = append(boardIdx[num], b)
 			}
 		}
