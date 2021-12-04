@@ -45,7 +45,7 @@ func newBoard() *board {
 
 func Bingo(s []string) (int, int) {
 
-	nums := util.SplitStringToInts(s[0], NumSeparator)
+	nums := util.SplitToInts(s[0], NumSeparator)
 
 	boardIdx := make(map[int][]*board)
 	boardsInput := s[1:]
@@ -53,13 +53,12 @@ func Bingo(s []string) (int, int) {
 	for i := 0; i < len(boardsInput); i += 6 {
 		b := newBoard()
 		for rNum, r := range boardsInput[i+1 : i+6] {
-			for cNum, num := range util.SplitStringToInts(r, ColSeparator) {
+			for cNum, num := range util.SplitToInts(r, ColSeparator) {
 				b.add(num, rNum, cNum)
 				if _, ok := boardIdx[num]; !ok {
 					boardIdx[num] = make([]*board, 0)
 				}
 				boardIdx[num] = append(boardIdx[num], b)
-				cNum++
 			}
 		}
 	}

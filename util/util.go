@@ -14,7 +14,7 @@ func Sum(i []int) int {
 	return sum
 }
 
-func SplitStringToInts(s, sep string) []int {
+func SplitToInts(s, sep string) []int {
 	nums := make([]int, 0)
 	for _, val := range strings.Split(s, sep) {
 		if val != "" {
