@@ -1,6 +1,9 @@
 package util
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func Sum(i []int) int {
 	sum := 0
@@ -9,6 +12,17 @@ func Sum(i []int) int {
 	}
 
 	return sum
+}
+
+func SplitStringToInts(s, sep string) []int {
+	nums := make([]int, 0)
+	for _, val := range strings.Split(s, sep) {
+		if val != "" {
+			nums = append(nums, TryParseInt(val))
+		}
+	}
+
+	return nums
 }
 
 func TryParseInt(s string) int {

@@ -2,7 +2,14 @@ package day04
 
 import (
 	"AdventCode2021/util"
-	"strings"
+)
+
+const (
+	Rows = 5
+	Cols = 5
+
+	NumSeparator = ","
+	ColSeparator = " "
 )
 
 type board struct {
@@ -24,24 +31,21 @@ func (b *board) mark(n int) bool {
 	b.total -= n
 	b.rows[b.nums[n][0]]++
 	b.cols[b.nums[n][1]]++
-	return b.rows[b.nums[n][0]] == 5 || b.cols[b.nums[n][1]] == 5
+	return b.rows[b.nums[n][0]] == Rows || b.cols[b.nums[n][1]] == Cols
 }
 
 func newBoard() *board {
 	return &board{
 		nums:   make(map[int][]int),
-		rows:   make([]int, 5),
-		cols:   make([]int, 5),
+		rows:   make([]int, Rows),
+		cols:   make([]int, Cols),
 		active: true,
 	}
 }
 
 func Bingo(s []string) (int, int) {
 
-	nums := make([]int, 0)
-	for _, val := range strings.Split(s[0], ",") {
-		nums = append(nums, util.TryParseInt(val))
-	}
+	nums := util.SplitStringToInts(s[0], NumSeparator)
 
 	boardIdx := make(map[int][]*board)
 	boardsInput := s[1:]
@@ -49,13 +53,7 @@ func Bingo(s []string) (int, int) {
 	for i := 0; i < len(boardsInput); i += 6 {
 		b := newBoard()
 		for rNum, r := range boardsInput[i+1 : i+6] {
-			cols := strings.Split(r, " ")
-			cNum := 0
-			for _, c := range cols {
-				if c == "" {
-					continue
-				}
-				num := util.TryParseInt(c)
+			for cNum, num := range util.SplitStringToInts(r, ColSeparator) {
 				b.add(num, rNum, cNum)
 				if _, ok := boardIdx[num]; !ok {
 					boardIdx[num] = make([]*board, 0)
