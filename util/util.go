@@ -19,3 +19,13 @@ func TryParseInt(s string) int {
 
 	return i
 }
+
+func TryParseBinary(s string) int {
+	i, e := strconv.ParseInt(s, 2, 32)
+	if e != nil {
+		panic(e)
+	}
+
+	return int(i)
+
+}
