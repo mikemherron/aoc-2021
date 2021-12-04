@@ -12,7 +12,7 @@ type testCase struct {
 	lifeSupport int
 }
 
-func TestComputePowerConsumption(t *testing.T) {
+func TestProcessDiagnostics(t *testing.T) {
 	cases := []testCase{
 		//gamma = 11011 (27), epsilon = 00100 (4) = 4*27 = 108
 		{"Single report",
