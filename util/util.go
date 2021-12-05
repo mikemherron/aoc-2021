@@ -14,7 +14,15 @@ func Sum(i []int) int {
 	return sum
 }
 
-func SplitToInts(s, sep string) []int {
+func Max(a int, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+func SplitToInt(s, sep string) []int {
 	nums := make([]int, 0)
 	for _, val := range strings.Split(s, sep) {
 		if val != "" {
@@ -25,8 +33,12 @@ func SplitToInts(s, sep string) []int {
 	return nums
 }
 
+func SplitByCommaToInt(s string) []int {
+	return SplitToInt(s, ",")
+}
+
 func TryParseInt(s string) int {
-	i, e := strconv.Atoi(s)
+	i, e := strconv.Atoi(strings.TrimSpace(s))
 	if e != nil {
 		panic(e)
 	}
