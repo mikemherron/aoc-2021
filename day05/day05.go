@@ -22,24 +22,26 @@ func FindDangerousVents(vents []string, diagonals bool) int {
 	cells := make([][]int, 0)
 	for _, v := range vents {
 		x1, y1, x2, y2 := parse(v)
-		if diagonals || y1 == y2 || x1 == x2 {
-			xC, yC := util.Max(x1, x2)+1, util.Max(y1, y2)+1
-			if len(cells) < yC {
-				cells = append(cells, make([][]int, yC-len(cells))...)
-			}
+		if !diagonals && y1 != y2 && x1 != x2 {
+			continue
+		}
 
-			yD, xD := direction(y1, y2), direction(x1, x2)
-			for x1 != x2+xD || y1 != y2+yD {
-				if len(cells[y1]) < xC {
-					cells[y1] = append(cells[y1], make([]int, xC-len(cells[y1]))...)
-				}
-				cells[y1][x1]++
-				if cells[y1][x1] == 2 {
-					total++
-				}
-				x1 += xD
-				y1 += yD
+		xC, yC := util.Max(x1, x2)+1, util.Max(y1, y2)+1
+		if len(cells) < yC {
+			cells = append(cells, make([][]int, yC-len(cells))...)
+		}
+
+		yD, xD := direction(y1, y2), direction(x1, x2)
+		for x1 != x2+xD || y1 != y2+yD {
+			if len(cells[y1]) < xC {
+				cells[y1] = append(cells[y1], make([]int, xC-len(cells[y1]))...)
 			}
+			cells[y1][x1]++
+			if cells[y1][x1] == 2 {
+				total++
+			}
+			x1 += xD
+			y1 += yD
 		}
 	}
 
