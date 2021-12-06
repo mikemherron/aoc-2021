@@ -8,8 +8,13 @@ import (
 	"strings"
 )
 
-func ReadIntsFrom(filePath string) []int {
-	lines := ReadLinesFrom(filePath)
+func ReadCommaSeperatedInts(filePath string) []int {
+	lines := ReadLines(filePath)
+	return util.SplitByCommaToInt(lines[0])
+}
+
+func ReadIntLines(filePath string) []int {
+	lines := ReadLines(filePath)
 	ints := make([]int, 0, len(lines))
 	for _, line := range lines {
 		ints = append(ints, util.TryParseInt(line))
@@ -18,7 +23,7 @@ func ReadIntsFrom(filePath string) []int {
 	return ints
 }
 
-func ReadLinesFrom(fileName string) []string {
+func ReadLines(fileName string) []string {
 	pwd, e := os.Getwd()
 	if e != nil {
 		panic(e)

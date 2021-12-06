@@ -6,23 +6,23 @@ import (
 )
 
 type testCase struct {
-	name   string
+	name  string
 	input []string
 	first int
-	last int
+	last  int
 }
 
 func TestBingo(t *testing.T) {
 	cases := []testCase{
 		{
 			"Example",
-			puzzleinput.ReadLinesFrom("04_example_input.txt"),
+			puzzleinput.ReadLines("04_example_input.txt"),
 			4512,
 			1924,
 		},
 		{
 			"Real",
-			puzzleinput.ReadLinesFrom("04_input.txt"),
+			puzzleinput.ReadLines("04_input.txt"),
 			72770,
 			13912,
 		},

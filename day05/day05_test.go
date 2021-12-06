@@ -16,25 +16,25 @@ func TestFindDangerousVents(t *testing.T) {
 	cases := []testCase{
 		{
 			"Example",
-			puzzleinput.ReadLinesFrom("05_example_input.txt"),
+			puzzleinput.ReadLines("05_example_input.txt"),
 			5,
 			false,
 		},
 		{
 			"Example with Diagonals",
-			puzzleinput.ReadLinesFrom("05_example_input.txt"),
+			puzzleinput.ReadLines("05_example_input.txt"),
 			12,
 			true,
 		},
 		{
 			"Real",
-			puzzleinput.ReadLinesFrom("05_input.txt"),
+			puzzleinput.ReadLines("05_input.txt"),
 			7674,
 			false,
 		},
 		{
 			"Real with Diagonals",
-			puzzleinput.ReadLinesFrom("05_input.txt"),
+			puzzleinput.ReadLines("05_input.txt"),
 			20898,
 			true,
 		},
