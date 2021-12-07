@@ -6,7 +6,6 @@ type StartState struct {
 }
 
 func SimulateLanternFish(starting []int, days int) int64 {
-
 	total := int64(0)
 	solutions := make(map[StartState]int64)
 	for i := 0; i < len(starting); i++ {
