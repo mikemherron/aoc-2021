@@ -36,7 +36,7 @@ func TestAlignCrabs(t *testing.T) {
 		{
 			"Real Scaling",
 			puzzleinput.ReadCommaSeperatedInts("07_input.txt"),
-			0,
+			92335207,
 			true,
 		},
 	}
