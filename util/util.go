@@ -33,6 +33,23 @@ func SplitToInt(s, sep string) []int {
 	return nums
 }
 
+func Filter(s []string, f func(s string) bool) []string {
+	filtered := make([]string, 0)
+	for _, v := range s {
+		if f(v) {
+			filtered = append(filtered, v)
+		}
+	}
+
+	return filtered
+}
+
+func Copy(s []string) []string {
+	c := make([]string, len(s))
+	copy(c, s)
+	return c
+}
+
 func SplitByCommaToInt(s string) []int {
 	return SplitToInt(s, ",")
 }

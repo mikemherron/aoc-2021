@@ -31,13 +31,6 @@ var digitSegments = map[int][]int{
 	0: {T, TR, TL, BL, BR, B},
 }
 
-var knownLengths = map[int]int{
-	2: 1,
-	3: 7,
-	4: 4,
-	7: 8,
-}
-
 func digit(mapping string, sequence string) int {
 	for n, segmentsOn := range digitSegments {
 		if len(segmentsOn) != len(sequence) {
@@ -60,52 +53,34 @@ func digit(mapping string, sequence string) int {
 
 func GetDigits(input []string) int {
 
-	allMappings := make([]string, 0)
-	permute(Symbols, 0, len(Symbols)-1, &allMappings)
-
-	total := 0
+	total, all := 0, buildPermutations()
 
 	for _, i := range input {
-
-		possibleMappings := make([]string, len(allMappings))
-		copy(possibleMappings, allMappings)
-
-		parts := strings.Split(i, "|")
-		patterns := strings.Split(strings.TrimSpace(parts[0]), " ")
-		for _, p := range patterns {
-			if _, ok := knownLengths[len(p)]; ok {
-				continue
-			}
-
-			v := knownLengths[len(p)]
-			for i := 0; i < len(possibleMappings); i++ {
-				if digit(possibleMappings[i], p) != v {
-					possibleMappings = append(possibleMappings[:i], possibleMappings[i+1:]...)
-					i--
-					break
-				}
-			}
-		}
-
-		for i := 0; i < len(possibleMappings); i++ {
+		patterns, readings := parse(i)
+		possible := util.Filter(util.Copy(all), func(s string) bool {
 			for _, p := range patterns {
-				if digit(possibleMappings[i], p) == -1 {
-					possibleMappings = append(possibleMappings[:i], possibleMappings[i+1:]...)
-					i--
-					break
+				if digit(s, p) == -1 {
+					return false
 				}
 			}
-		}
+			return true
+		})
 
-		reading := ""
-		for _, o := range strings.Split(strings.TrimSpace(parts[1]), " ") {
-			reading += fmt.Sprintf("%d", digit(possibleMappings[0], o))
+		var reading string
+		for _, o := range readings {
+			reading += fmt.Sprintf("%d", digit(possible[0], o))
 		}
 
 		total += util.TryParseInt(reading)
 	}
 
 	return total
+}
+
+func buildPermutations() []string {
+	p := make([]string, 0)
+	permute(Symbols, 0, len(Symbols)-1, &p)
+	return p
 }
 
 func permute(s string, l int, r int, out *[]string) {
@@ -126,4 +101,13 @@ func swap(s string, i int, j int) string {
 	b[i] = b[j]
 	b[j] = t
 	return string(b)
+}
+
+func parse(input string) ([]string, []string) {
+	parts := strings.Split(input, "|")
+	parsePart := func(i int, s []string) []string {
+		return strings.Split(strings.TrimSpace(s[i]), " ")
+	}
+
+	return parsePart(0, parts), parsePart(1, parts)
 }
