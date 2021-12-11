@@ -2,7 +2,7 @@ package day08
 
 import (
 	"AdventCode2021/util"
-	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -68,7 +68,7 @@ func GetDigits(input []string) int {
 
 		var reading string
 		for _, o := range readings {
-			reading += fmt.Sprintf("%d", digit(possible[0], o))
+			reading += strconv.Itoa(digit(possible[0], o))
 		}
 
 		total += util.TryParseInt(reading)
