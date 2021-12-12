@@ -72,3 +72,12 @@ func TryParseBinary(s string) int {
 	return int(i)
 
 }
+
+func CopyMap(m map[string]bool) map[string]bool {
+	n := make(map[string]bool)
+	for k, v := range m {
+		n[k] = v
+	}
+
+	return n
+}
