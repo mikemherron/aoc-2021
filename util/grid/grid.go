@@ -52,6 +52,17 @@ var (
 		{0, 1},
 		{0, -1},
 	}
+
+	DownAndRight = VisitPath{
+		{1, 0},
+		{0, 1},
+	}
+
+	DownRightAndUp = VisitPath{
+		{-1, 0},
+		{1, 0},
+		{0, 1},
+	}
 )
 
 func (g Grid) VisitAdjacent(rowStart int, colStart int, path VisitPath, f Visitor) {
@@ -81,6 +92,10 @@ func (g Grid) VisitAll(f Visitor) {
 
 func (g Grid) Cells() int {
 	return len(g) * len(g[0])
+}
+
+func (g Grid) Value(r int, c int) int {
+	return g[r][c]
 }
 
 func (g *Grid) String() string {
