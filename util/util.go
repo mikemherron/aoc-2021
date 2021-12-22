@@ -14,12 +14,60 @@ func Sum(i []int) int {
 	return sum
 }
 
+func Sum64(i []int64) int64 {
+	sum := int64(0)
+	for _, v := range i {
+		sum += v
+	}
+
+	return sum
+}
+
+func Product64(v []int64) int64 {
+	prod := v[0]
+	for i := 1; i < len(v); i++ {
+		prod *= v[i]
+	}
+
+	return prod
+}
+
+func Min64(v []int64) int64 {
+	min := v[0]
+	for i := 1; i < len(v); i++ {
+		if v[i] < min {
+			min = v[i]
+		}
+	}
+
+	return min
+}
+
+func Max64(v []int64) int64 {
+	max := v[0]
+	for i := 1; i < len(v); i++ {
+		if v[i] > max {
+			max = v[i]
+		}
+	}
+
+	return max
+}
+
 func Max(a int, b int) int {
 	if a > b {
 		return a
 	}
 
 	return b
+}
+func AsInts(s []string) []int {
+	ints := make([]int, len(s))
+	for i, v := range s {
+		ints[i] = TryParseInt(v)
+	}
+
+	return ints
 }
 
 func SplitToInt(s, sep string) []int {
@@ -71,6 +119,15 @@ func TryParseBinary(s string) int {
 
 	return int(i)
 
+}
+
+func TryParseBinary64(s string) int64 {
+	i, e := strconv.ParseInt(s, 2, 64)
+	if e != nil {
+		panic(e)
+	}
+
+	return i
 }
 
 func CopyMap(m map[string]bool) map[string]bool {

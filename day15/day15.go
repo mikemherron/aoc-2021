@@ -5,10 +5,6 @@ import (
 	"math"
 )
 
-//var (
-//	sols = make(map[int]map[grid.Pos]bool)
-//)
-
 func FindMinRiskPath(input []string, expand bool) int {
 	g := grid.NewGrid(input)
 	if expand {
@@ -71,12 +67,3 @@ func expandGrid(g grid.Grid) grid.Grid {
 
 	return expanded
 }
-
-//func copyMap(m map[grid.Pos]bool) map[grid.Pos]bool {
-//	n := make(map[grid.Pos]bool)
-//	for k, v := range m {
-//		n[k] = v
-//	}
-//
-//	return n
-//}
