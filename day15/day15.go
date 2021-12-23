@@ -6,7 +6,7 @@ import (
 )
 
 func FindMinRiskPath(input []string, expand bool) int {
-	g := grid.NewGrid(input)
+	g := grid.NewIntGrid(input)
 	if expand {
 		g = expandGrid(g)
 	}

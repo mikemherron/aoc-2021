@@ -3,22 +3,32 @@ package grid
 import (
 	"AdventCode2021/util"
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 type Grid [][]int
 
-func NewGrid(lines []string) Grid {
+func NewIntGrid(lines []string) Grid {
+	return NewGrid(lines, func(s string) int {
+		return util.TryParseInt(s)
+	})
+}
+
+func NewGrid(lines []string, reader CellReader) Grid {
 	g := make(Grid, len(lines))
 	cols := len(lines[0])
 	for r, l := range lines {
 		g[r] = make([]int, cols)
 		for c := 0; c < cols; c++ {
-			g[r][c] = util.TryParseInt(string(l[c]))
+			g[r][c] = reader(string(l[c]))
 		}
 	}
 
 	return g
 }
+
+type CellReader func(string) int
 
 type Pos struct {
 	Row, Col int
@@ -34,15 +44,15 @@ type VisitPath [][]int
 
 var (
 	Surrounding = VisitPath{
-		{0, 0},
-		{1, 0},
-		{0, 1},
-		{1, 1},
-		{1, -1},
-		{-1, 1},
-		{-1, 0},
-		{0, -1},
 		{-1, -1},
+		{-1, 0},
+		{-1, 1},
+		{0, -1},
+		{0, 0},
+		{0, 1},
+		{1, -1},
+		{1, 0},
+		{1, 1},
 	}
 
 	Immediate = VisitPath{
@@ -54,12 +64,6 @@ var (
 	}
 
 	DownAndRight = VisitPath{
-		{1, 0},
-		{0, 1},
-	}
-
-	DownRightAndUp = VisitPath{
-		{-1, 0},
 		{1, 0},
 		{0, 1},
 	}
@@ -82,6 +86,22 @@ func (g Grid) VisitAdjacent(rowStart int, colStart int, path VisitPath, f Visito
 	}
 }
 
+func (g Grid) VisitAdjacentWithFiller(rowStart int, colStart int, filler int, path VisitPath, f Visitor) {
+	for _, p := range path {
+		r := rowStart + p[0]
+		c := colStart + p[1]
+		var val *int
+		if r < 0 || r >= len(g) || c < 0 || c >= len(g[r]) {
+			val = &filler
+		} else {
+			val = &g[r][c]
+		}
+
+		pos := Pos{r, c}
+		f(pos, val)
+	}
+}
+
 func (g Grid) VisitAll(f Visitor) {
 	for r := range g {
 		for c := range g[r] {
@@ -99,18 +119,42 @@ func (g Grid) Value(r int, c int) int {
 }
 
 func (g *Grid) String() string {
+	return g.Render(func(i int) string {
+		return fmt.Sprintf("%d", i)
+	})
+}
+
+func (g *Grid) Render(renderer func(int) string) string {
 	s, r := "", 0
 	g.VisitAll(func(p Pos, v *int) {
 		if p.Row > r {
 			s += "\n"
 			r = p.Row
 		}
-		if *v == 0 {
-			s += "*"
-		} else {
-			s += fmt.Sprintf("%d", *v)
-		}
+
+		s += renderer(*v)
 	})
 
 	return s
+}
+
+func (g *Grid) Copy() *Grid {
+	c := NewIntGrid(strings.Split(g.String(), "\n"))
+	return &c
+}
+
+func (g *Grid) Grow(val int) *Grid {
+	valString := strconv.Itoa(val)
+	lines := strings.Split(g.String(), "\n")
+	cols := len(lines[0])
+	emptyLine := strings.Repeat(valString, cols)
+
+	lines = append([]string{emptyLine, emptyLine}, lines...)
+	lines = append(lines, emptyLine, emptyLine)
+	for i, line := range lines {
+		lines[i] = fmt.Sprintf("%s%s%s", strings.Repeat(valString, 2), line, strings.Repeat(valString, 2))
+	}
+
+	grown := NewIntGrid(lines)
+	return &grown
 }

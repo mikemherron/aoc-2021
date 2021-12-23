@@ -6,7 +6,7 @@ import (
 
 func CountFlashes(input []string, target int) (int, int) {
 	var flashes, targetFlashes int
-	g := grid.NewGrid(input)
+	g := grid.NewIntGrid(input)
 	i := 1
 	for {
 		previous := flashes

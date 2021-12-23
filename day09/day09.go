@@ -7,7 +7,7 @@ import (
 )
 
 func GetRiskLevel(input []string) (int, int) {
-	lows, basins, g := make([]int, 0), make([]int, 0), grid.NewGrid(input)
+	lows, basins, g := make([]int, 0), make([]int, 0), grid.NewIntGrid(input)
 	for r := range g {
 		for c := range g[r] {
 			v, lowest := g[r][c], true

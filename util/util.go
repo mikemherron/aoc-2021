@@ -5,6 +5,13 @@ import (
 	"strings"
 )
 
+func Abs(i int) int {
+	if i < 0 {
+		return i * -1
+	}
+
+	return i
+}
 func Sum(i []int) int {
 	sum := 0
 	for _, v := range i {
