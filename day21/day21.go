@@ -22,6 +22,18 @@ type player struct {
 	score int
 }
 
+func (p *player) update(roll int) {
+	p.pos += roll
+	if p.pos > 10 {
+		p.pos = p.pos % 10
+		if p.pos == 0 {
+			p.pos = 10
+		}
+	}
+
+	p.score += p.pos
+}
+
 type state struct {
 	active player
 	next   player
@@ -41,15 +53,7 @@ func play(s state, outcomes map[state]map[int]int) map[int]int {
 		for j := 1; j <= 3; j++ {
 			for k := 1; k <= 3; k++ {
 				active := s.active
-				active.pos += i + j + k
-				if active.pos > 10 {
-					active.pos = active.pos % 10
-					if active.pos == 0 {
-						active.pos = 10
-					}
-				}
-
-				active.score += active.pos
+				active.update(i + j + k)
 				if active.score >= 21 {
 					wins[active.num]++
 					continue
@@ -101,17 +105,7 @@ func PlayDeterministic(p1, p2 int) int {
 	lastScore := 0
 	for {
 		for _, p := range players {
-			roll := d.roll()
-
-			p.pos += roll
-			if p.pos > 10 {
-				p.pos = p.pos % 10
-				if p.pos == 0 {
-					p.pos = 10
-				}
-			}
-
-			p.score += p.pos
+			p.update(d.roll())
 			if p.score >= 1000 {
 				return d.rolls * lastScore
 			}

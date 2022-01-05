@@ -68,6 +68,15 @@ func Max(a int, b int) int {
 
 	return b
 }
+
+func Min(a int, b int) int {
+	if a < b {
+		return a
+	}
+
+	return b
+}
+
 func AsInts(s []string) []int {
 	ints := make([]int, len(s))
 	for i, v := range s {
