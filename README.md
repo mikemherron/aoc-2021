@@ -5,3 +5,5 @@ Needed some small reddit hints on Day 19, some bigger ones on Day 24 but apart f
 Had a lot of fun and learned a lot. Whenever I need to cheer myself up  I just  go back and run my Day 22 test cases.      
 
 Disclaimer: the code quality contained in this repository can vary greatly.
+
+![Day22](day22/day22.jpg)
