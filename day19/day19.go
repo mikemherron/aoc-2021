@@ -28,11 +28,10 @@ func CountBeacons(input []string, threshold int) (int, int) {
 	}
 
 	max := math.MinInt
-	for i, s := range scanners {
-		for j, s2 := range scanners {
+	for _, s := range scanners {
+		for _, s2 := range scanners {
 			dist := s.distance(s2)
 			if dist > max {
-				fmt.Printf("Max between %d and %d: %d\n", i, j, dist)
 				max = dist
 			}
 		}
@@ -78,7 +77,16 @@ func (p position) string() string {
 }
 
 func (s scanner) distance(s2 *scanner) int {
-	return util.Abs(s.pos.x-s2.pos.x) + (s.pos.y - s2.pos.y) + (s.pos.z - s2.pos.z)
+	maxX := util.Max(s.pos.x, s2.pos.x)
+	minX := util.Min(s.pos.x, s2.pos.x)
+
+	maxY := util.Max(s.pos.y, s2.pos.y)
+	minY := util.Min(s.pos.y, s2.pos.y)
+
+	maxZ := util.Max(s.pos.z, s2.pos.z)
+	minZ := util.Min(s.pos.z, s2.pos.z)
+
+	return (maxX - minX) + (maxY - minY) + (maxZ - minZ)
 }
 
 func newScanner() *scanner {

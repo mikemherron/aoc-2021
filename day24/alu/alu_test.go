@@ -17,23 +17,23 @@ func TestALU(t *testing.T) {
 		{
 			name: "Negate number",
 			program: []string{
-				"inp X",
-				"mul X -1",
+				"inp x",
+				"mul x -1",
 			},
 			input: []int{
 				10,
 			},
 			expected: map[string]int{
-				"X": -10,
+				"x": -10,
 			},
 		},
 		{
 			name: "3 times as big true",
 			program: []string{
 				"inp z",
-				"inp X",
+				"inp x",
 				"mul z 3",
-				"eql z X",
+				"eql z x",
 			},
 			input: []int{
 				5, 15,
@@ -46,9 +46,9 @@ func TestALU(t *testing.T) {
 			name: "3 times as big false",
 			program: []string{
 				"inp z",
-				"inp X",
+				"inp x",
 				"mul z 3",
-				"eql z X",
+				"eql z x",
 			},
 			input: []int{
 				1, 15,

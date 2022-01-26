@@ -28,7 +28,7 @@ func TestCountBeacons(t *testing.T) {
 			puzzleinput.ReadLines("19_input.txt"),
 			12,
 			419,
-			0,
+			13210,
 		},
 	}
 

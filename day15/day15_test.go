@@ -40,10 +40,16 @@ func TestFindMinRiskPath(t *testing.T) {
 			315,
 		},
 		{
+			"Up",
+			puzzleinput.ReadLines("15_up_input.txt"),
+			false,
+			8,
+		},
+		{
 			"Real Expanded",
 			puzzleinput.ReadLines("15_input.txt"),
 			true,
-			0,
+			2963,
 		},
 	}
 

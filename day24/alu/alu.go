@@ -138,7 +138,9 @@ func (alu *ALU) Compile(source []string) *Program {
 		p.s = append(p.s, s)
 	}
 
-	p.labels[lastLabel][1] = len(source) - 1
+	if len(lastLabel) > 0 {
+		p.labels[lastLabel][1] = len(source) - 1
+	}
 
 	return p
 }
